@@ -14,18 +14,19 @@ export const api = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "https://alibackend.duckdns.org/",
     prepareHeaders: (headers, { getState, endpoint }) => {
-      const userData = (getState() as RootState).auth.userData;
-      const token = userData ? userData.idToken : undefined;
+      const publicEndpoints = ["login", "signup"];
 
-      const publicEndpoints = ["login", "signup", "verify_otp", "resend_otp"]; //api endpoints
-
-      console.log({ publicEndpoints, endpoint });
-      if (publicEndpoints.includes(endpoint)) {
+      if (publicEndpoints.includes(endpoint || "")) {
+        console.log(
+          `[prepareHeaders] Public endpoint: "${endpoint}". Skipping token.`
+        );
         return headers;
       }
 
-      headers.set("authorization", `Bearer ${token}`);
-
+      const token = (getState() as RootState).auth.authData?.idToken;
+      if (token) {
+        headers.set("authorization", `Bearer ${token}`);
+      }
       return headers;
     },
   }),

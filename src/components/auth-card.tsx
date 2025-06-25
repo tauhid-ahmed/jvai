@@ -7,8 +7,9 @@ type AuthCardProps = {
   title: string;
   subtitle: string;
   backLink: string;
-  backLinkName: string;
-  backLinkMessage: string;
+  backLinkName?: string;
+  backLinkMessage?: string;
+  footer?: React.ReactNode;
 } & React.ComponentProps<"div">;
 
 export default function AuthCard({
@@ -19,6 +20,7 @@ export default function AuthCard({
   className,
   children,
   backLinkName,
+  footer,
 }: AuthCardProps) {
   return (
     <div className={cn("space-y-6 max-w-md w-full mx-auto px-4", className)}>
@@ -30,12 +32,16 @@ export default function AuthCard({
         <p className="text-grey-500 text-sm">{subtitle}</p>
       </div>
       {children}
-      <div className="flex items-center justify-center">
-        <span className="text-sm text-grey-400">{backLinkMessage}</span>
-        <Button asChild variant="link" className="text-blue-200">
-          <Link to={backLink}>{backLinkName}</Link>
-        </Button>
-      </div>
+      {!footer ? (
+        <div className="flex items-center justify-center">
+          <span className="text-sm text-grey-400">{backLinkMessage}</span>
+          <Button asChild variant="link" className="text-blue-200">
+            <Link to={backLink}>{backLinkName}</Link>
+          </Button>
+        </div>
+      ) : (
+        footer
+      )}
     </div>
   );
 }

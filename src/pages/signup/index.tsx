@@ -31,7 +31,7 @@ export default function SignupPage() {
 
       // save user email for verification code send
       localStorage.setItem("email", formData.email);
-      dispatch(setCredentials({ userData }));
+      dispatch(setCredentials(userData));
 
       // Re-enabled navigation to the next step
       navigate(verificationCodePath());

@@ -25,7 +25,7 @@ export default function LoginPage() {
     try {
       const userData = await login(formData).unwrap();
       console.log(userData);
-      dispatch(setCredentials({ userData }));
+      dispatch(setCredentials(userData));
       navigate(chatPath());
     } catch (err) {
       console.error("Failed to login:", err);

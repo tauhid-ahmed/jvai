@@ -1,14 +1,8 @@
-import { useEffect, useState } from "react";
-import { AuthCard, Input } from "../../components";
+import { useState } from "react";
+import { AuthCard } from "../../components";
 import { Button } from "../../components/button";
-import { chatPath, signupPath, verificationCodePath } from "../../paths";
-import {
-  useLoginMutation,
-  useResendOtpMutation,
-  useVerifyOtpMutation,
-} from "../../services/api";
-import { useAppDispatch } from "../../app/hooks";
-import { setCredentials } from "../../features/auth/authSlice";
+import { chatPath, signupPath } from "../../paths";
+import { useResendOtpMutation, useVerifyOtpMutation } from "../../services/api";
 import { useNavigate } from "react-router";
 import {
   InputOTP,
@@ -18,38 +12,32 @@ import {
 
 export default function VerificationCodePage() {
   const [otp, setOtp] = useState("");
-  const dispatch = useAppDispatch();
   const [sendOtp] = useResendOtpMutation();
   const [verifyOtp] = useVerifyOtpMutation();
-  const [login] = useLoginMutation();
   const navigate = useNavigate();
   const parsedEmail = localStorage.getItem("email") as string;
-
-  useEffect(() => {
-    const init = async () => {
-      try {
-        if (parsedEmail) {
-          const data = await sendOtp({
-            email: parsedEmail,
-          }).unwrap();
-          console.log(data);
-        }
-      } catch (err) {
-        console.log("otp", err);
-      }
-    };
-    init();
-  }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       if (parsedEmail) {
-        const data = await verifyOtp({
+        await verifyOtp({
           email: parsedEmail,
           otp: otp,
         }).unwrap();
-        // dispatch();
+        navigate(chatPath());
+      }
+    } catch (err) {
+      console.log("otp", err);
+    }
+  };
+
+  const handleResendOtp = async () => {
+    try {
+      if (parsedEmail) {
+        const data = await sendOtp({
+          email: parsedEmail,
+        }).unwrap();
         console.log(data);
       }
     } catch (err) {
@@ -63,6 +51,20 @@ export default function VerificationCodePage() {
       backLink={signupPath()}
       backLinkName="Resend OTP"
       backLinkMessage="Didn't receive the code?"
+      footer={
+        <div className="flex items-center justify-center">
+          <span className="text-sm text-grey-400">
+            Didn't receive the code?
+          </span>
+          <Button
+            onClick={handleResendOtp}
+            variant="link"
+            className="text-blue-200"
+          >
+            Resend OTP
+          </Button>
+        </div>
+      }
     >
       <form onSubmit={handleSubmit}>
         <InputOTP value={otp} onChange={setOtp} maxLength={4}>
