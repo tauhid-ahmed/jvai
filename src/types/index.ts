@@ -1,0 +1,35 @@
+export interface UserProfile {
+  accessToken: string;
+  email: string;
+  idToken: string;
+  localId: string;
+  message: string;
+  refresh_token: string;
+}
+
+export type AuthResponse = UserProfile;
+
+export interface LoginRequest {
+  email: string;
+  password: string;
+}
+
+export interface ApiError {
+  data: {
+    [key: string]: any;
+  };
+  status: number;
+}
+
+export interface ResendOtpRequest {
+  email: string;
+}
+
+export interface VerifyOtpRequest {
+  email: string;
+  otp: string;
+}
+
+export interface ResendOtpResponse {
+  detail: string;
+}
