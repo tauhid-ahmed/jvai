@@ -1,0 +1,9 @@
+export const landingPath = () => "/home";
+export const loginPath = () => "/login";
+export const signupPath = () => "/signUp";
+export const verificationCodePath = () => "/verificationCode";
+export const chatPath = () => "/";
+export const usersPath = () => "/users";
+export const helpAndSupportPath = () => "/helpAndSupport";
+export const manageSubscriptionPath = () => "/manageSubscription";
+export const faqPath = () => "/faq";
