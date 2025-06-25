@@ -13,6 +13,7 @@ import {
 } from "../pages";
 
 import * as paths from "../paths";
+import AuthLayout from "../components/auth-layout";
 
 export function AppRouter() {
   return (
@@ -20,8 +21,12 @@ export function AppRouter() {
       <Routes>
         <Route index element={<ChatPage />} />
         <Route path={paths.landingPath()} element={<HomePage />} />
-        <Route path={paths.loginPath()} element={<LoginPage />} />
-        <Route path={paths.signupPath()} element={<SignupPage />} />
+
+        <Route element={<AuthLayout />}>
+          <Route path={paths.loginPath()} element={<LoginPage />} />
+          <Route path={paths.signupPath()} element={<SignupPage />} />
+        </Route>
+
         <Route
           path={paths.verificationCodePath()}
           element={<VerificationCodePage />}
