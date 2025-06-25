@@ -4,7 +4,6 @@ import { landingPath } from "../paths";
 import { useEffect } from "react";
 
 export default function ProtectedLayout() {
-  return <Outlet />;
   const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
 
@@ -17,4 +16,5 @@ export default function ProtectedLayout() {
   if (!isAuthenticated) {
     return null;
   }
+  return <Outlet />;
 }
