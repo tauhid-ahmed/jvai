@@ -39,7 +39,7 @@ export default function CaseUse() {
       id={sections.caseUse.slice(1)}
       className="bg-blue-800 text-grey-100"
     >
-      <div className="px-gutter space-y-8">
+      <div className="px-gutter space-y-8 text-center">
         <SectionTitle>Case Use</SectionTitle>
         <p>
           See how healthcare providers across specialties are transforming their
@@ -47,18 +47,26 @@ export default function CaseUse() {
         </p>
       </div>
       <Container>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-10 mt-10">
+        <div className="grid lg:grid-cols-2 gap-6 lg:gap-10 mt-10">
           {data.map((item) => (
             <div
-              className="bg-blue-600 p-8 rounded-lg border border-blue-300 space-y-8"
+              className="bg-blue-600 p-8 rounded-lg border border-blue-300 space-y-4"
               key={item.title}
             >
-              <div className="pb-4 border-b border-blue-300">
-                <h3 className="text-2xl font-medium text-blue-50">
-                  {item.title}
-                </h3>
+              <h3 className="text-2xl font-medium text-blue-50">
+                {item.title}
+              </h3>
+              {item.description && <p>{item.description}</p>}
+              {item.quote && (
+                <div className="border-l-4 border-blue-200/20 pl-4">
+                  <p className="italic text-gray-200">
+                    &quot;{item.quote}&quot;
+                  </p>
+                </div>
+              )}
+              <div className="text-right">
+                <span className="text-grey-300 text-xs">- {item.author}</span>
               </div>
-              <p>{item.description}</p>
             </div>
           ))}
         </div>
