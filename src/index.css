@@ -14,6 +14,7 @@
   --color-blue-900: #0a0f21;
   --color-blue-950: #060a16;
 
+  /* spelling grey not tailwind gray spelling */
   --color-grey-50: #fff;
   --color-grey-100: #f8fafc;
   --color-grey-200: #d1d5db;
@@ -29,8 +30,33 @@
   --color-color-1: #f59e0c;
   --color-color-2: #ec4899;
   --color-color-3: #12b989;
+
+  --spacing-gutter: 2.5rem;
+  --spacing-8_5: 2.125rem;
+  --spacing-15: 3.75rem;
+  --spacing-30: 7.5rem;
+
+  --text-xl1: 1.4375rem;
+
+  --animate-glow: glow 3s linear infinite alternate-reverse;
+  @keyframes glow {
+    % {
+      filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.5));
+    }
+
+    50% {
+      filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
+    }
+    100% {
+      filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.5));
+    }
+  }
+}
+
+html {
+  @apply scroll-smooth;
 }
 
 body {
-  @apply font-display;
+  @apply font-display overflow-x-hidden;
 }
