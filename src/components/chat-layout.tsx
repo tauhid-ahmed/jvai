@@ -6,6 +6,7 @@ import { Logo } from "./logo";
 import { useLogoutMutation } from "../services/api";
 import { useAppDispatch } from "../app/hooks";
 import { logoutUser } from "../features/auth/authSlice";
+import ModeToggle from "./mode-toggle";
 
 export default function ChatLayout() {
   const [isMenuCollapsed, setIsMenuCollapsed] = useState(false);
@@ -44,7 +45,7 @@ export default function ChatLayout() {
           )}
         </div>
         <div className="flex-1 overflow-y-scroll">
-          {/* <div className="h-screen bg-emerald-500"></div> */}
+          <ModeToggle />
         </div>
         {!isMenuCollapsed && (
           <div className="pb-8 pt-4">
