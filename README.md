@@ -1,69 +1,43 @@
-# React + TypeScript + Vite
+✅ Task Completion Note
+Dear Shakil bhai & JVAI Team,
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Thank you for the opportunity.
 
-Currently, two official plugins are available:
+I’ve completed the assigned React.js task based on the given instructions and live website reference. Here's a quick summary of my work:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🛠️ What I Did:
+Recreated the site structure using vanilla React and React Router DOM.
 
-## Expanding the ESLint configuration
+Used Redux for state management (avoided Context API or UI libraries for simplicity and clarity).
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Followed the component hierarchy and routing flow as observed in the reference site.
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Implemented API integration with the provided backend (ALI.postman_collection.json).
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+Styled the app using Tailwind CSS, as per the requirements.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+⚠️ Known Issues / Limitations:
+Some UI/UX polish and visual accuracy were skipped due to the limited time frame.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Encountered server-side issues while creating a new chat:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Server rejected all content types: application/json, multipart/form-data, and plain text.
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+This happened both in my code and when testing directly through the provided Postman collection.
+
+Despite these blockers, I attempted multiple workarounds and ensured the rest of the functionality was covered properly.
+
+🔍 Tech Stack Used:
+React.js (with React Router DOM)
+
+Redux (no react-hook-form or third-party UI library)
+
+Tailwind CSS (customized with utility-first approach)
+
+Please feel free to reach out if you'd like a walkthrough or if further refinement is required.
+
+Thanks again for the opportunity.
+
+Best regards,
+Tauhid Ahmed
+[Portfolio](https://tauhidahmed.vercel.app/) • [GitHub](https://github.com/tauhid-ahmed) • [LinkedIn](https://www.linkedin.com/in/tauhidxahmed/)

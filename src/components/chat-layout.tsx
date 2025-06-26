@@ -9,6 +9,7 @@ import { logoutUser } from "../features/auth/authSlice";
 import ModeToggle from "./mode-toggle";
 import * as paths from "../paths";
 import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function ChatLayout() {
   const [isMenuCollapsed, setIsMenuCollapsed] = useState(false);
@@ -49,8 +50,8 @@ export default function ChatLayout() {
         <div className="flex-1 overflow-y-scroll p-4 space-y-6 [&_*]:whitespace-nowrap!">
           {!isMenuCollapsed && (
             <>
-              <Button size="lg" className="w-full">
-                + New Chat
+              <Button asChild size="lg" className="w-full">
+                <Link to={paths.chatPath()}>+ New Chat</Link>
               </Button>
               <ModeToggle />
             </>
@@ -66,7 +67,7 @@ export default function ChatLayout() {
           </div>
         )}
       </div>
-      <div className="px-4 text-grey-900 dark:text-grey-100 bg-grey-300 dark:bg-blue-400">
+      <div className="flex flex-col h-screen px-4 text-grey-900 dark:text-grey-100 bg-grey-300 dark:bg-blue-400">
         <div className="h-16 flex gap-4 justify-between items-center -mx-4 px-4 bg-zinc-200 dark:bg-blue-400 border-b border-zinc-300 dark:border-zinc-900/20">
           <div className="flex gap-4 items-center">
             <span className="size-14 inline-flex items-center justify-center rounded-full border"></span>
@@ -77,7 +78,9 @@ export default function ChatLayout() {
           </div>
           <Button>His</Button>
         </div>
-        <Outlet />
+        <div className="flex-1 overflow-y-scroll">
+          <Outlet />
+        </div>
       </div>
     </div>
   );

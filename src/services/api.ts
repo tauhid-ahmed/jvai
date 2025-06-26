@@ -1,6 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import type { RootState } from "../app/store";
 import type {
+  ChatListItem,
+  ChatMessage,
+  ChatThread,
   LoginRequest,
   ResendOtpRequest,
   ResendOtpResponse,
@@ -30,7 +33,7 @@ export const api = createApi({
       return headers;
     },
   }),
-  tagTypes: ["User"],
+  tagTypes: ["User", "ChatList", "ChatThread"],
 
   endpoints: (builder) => ({
     // "signin" endpoint
@@ -91,6 +94,48 @@ export const api = createApi({
         body,
       }),
     }),
+
+    // new chat
+    createChat: builder.mutation<ChatThread, { message: string }>({
+      query: ({ message }) => ({
+        url: "chat/create_chat/",
+        method: "POST",
+        headers: {
+          "Content-Type": "text/plain",
+        },
+        body: message,
+      }),
+      invalidatesTags: [{ type: "ChatList", id: "LIST" }],
+    }),
+
+    // add chat message
+    addMessageToChat: builder.mutation<
+      ChatMessage,
+      { chatId: number; message: string }
+    >({
+      query: ({ chatId, message }) => ({
+        url: "chat/add_message_to_chat/",
+        method: "POST",
+        body: message,
+        headers: { "Content-Type": "text/plain" },
+        params: { chat_id: chatId },
+      }),
+      invalidatesTags: (result, error, { chatId }) => [
+        { type: "ChatThread", id: chatId },
+      ],
+    }),
+
+    // get chat list
+    getChatList: builder.query<ChatListItem[], void>({
+      query: () => "chat/get_users_chat_list/",
+      providesTags: (result) =>
+        result
+          ? [
+              ...result.map(({ id }) => ({ type: "ChatList" as const, id })),
+              { type: "ChatList", id: "LIST" },
+            ]
+          : [{ type: "ChatList", id: "LIST" }],
+    }),
   }),
 });
 
@@ -101,5 +146,7 @@ export const {
   useResendOtpMutation,
   useVerifyOtpMutation,
   useSendSupportRequestMutation,
+  useCreateChatMutation,
+  useAddMessageToChatMutation,
   useLogoutMutation,
 } = api;

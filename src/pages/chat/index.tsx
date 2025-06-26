@@ -1,3 +1,13 @@
+import ChatEditor from "../../components/chat-editor";
+import { useAppDispatch } from "../../app/hooks";
+import { setChatId } from "../../features/chat/chatSlice";
+import { useEffect } from "react";
+
 export default function ChatPage() {
-  return <div>ChatPage</div>;
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(setChatId(""));
+  }, []);
+  return <ChatEditor />;
 }

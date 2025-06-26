@@ -35,3 +35,23 @@ export interface SupportRequest {
   email: string;
   query: string;
 }
+
+export interface ChatListItem {
+  id: number;
+  title: string;
+  last_message_preview: string;
+  updated_at: string;
+}
+
+export interface ChatMessage {
+  id: number;
+  sender: "user" | "ai";
+  text: string;
+  timestamp: string;
+}
+
+export interface ChatThread {
+  id: number;
+  title: string;
+  history: ChatMessage[];
+}
