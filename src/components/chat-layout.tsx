@@ -7,6 +7,8 @@ import { useLogoutMutation } from "../services/api";
 import { useAppDispatch } from "../app/hooks";
 import { logoutUser } from "../features/auth/authSlice";
 import ModeToggle from "./mode-toggle";
+import * as paths from "../paths";
+import { NavLink } from "react-router-dom";
 
 export default function ChatLayout() {
   const [isMenuCollapsed, setIsMenuCollapsed] = useState(false);
@@ -29,8 +31,8 @@ export default function ChatLayout() {
         "grid-cols-[18rem_1fr]": !isMenuCollapsed,
       })}
     >
-      <div className="h-screen flex flex-col">
-        <div className="h-16 flex items-center px-4">
+      <div className="h-screen flex flex-col text-grey-900 dark:text-grey-100 bg-grey-300 dark:bg-blue-400 border-r border-grey-200 dark:border-grey-900/20">
+        <div className="h-16 flex items-center px-4 border-b border-grey-200 dark:border-grey-900/20">
           {isMenuCollapsed ? (
             <Button onClick={() => setIsMenuCollapsed(!isMenuCollapsed)}>
               M
@@ -44,8 +46,10 @@ export default function ChatLayout() {
             </div>
           )}
         </div>
-        <div className="flex-1 overflow-y-scroll">
-          <ModeToggle />
+        <div className="flex-1 overflow-y-scroll p-4 space-y-6 [&_*]:whitespace-nowrap!">
+          {!isMenuCollapsed && <ModeToggle />}
+
+          <Navigation isExpanded={!isMenuCollapsed} />
         </div>
         {!isMenuCollapsed && (
           <div className="pb-8 pt-4">
@@ -55,8 +59,8 @@ export default function ChatLayout() {
           </div>
         )}
       </div>
-      <div className="px-4">
-        <div className="h-16 flex gap-4 justify-between items-center">
+      <div className="px-4 text-grey-900 dark:text-grey-100 bg-grey-300 dark:bg-blue-400">
+        <div className="h-16 flex gap-4 justify-between items-center -mx-4 px-4 bg-zinc-200 dark:bg-blue-400 border-b border-zinc-300 dark:border-zinc-900/20">
           <div className="flex gap-4 items-center">
             <span className="size-14 inline-flex items-center justify-center rounded-full border"></span>
             <span className="flex flex-col">
@@ -69,5 +73,52 @@ export default function ChatLayout() {
         <Outlet />
       </div>
     </div>
+  );
+}
+
+const navigationData = [
+  {
+    icon: "⚡︎",
+    name: "Manage Subscription",
+    to: paths.manageSubscriptionPath,
+  },
+  {
+    icon: "👤",
+    name: "Users",
+    to: paths.usersPath,
+  },
+  {
+    icon: "🤝",
+    name: "Help And Support",
+    to: paths.helpAndSupportPath,
+  },
+  {
+    icon: "?",
+    name: "FAQ",
+    to: paths.faqPath,
+  },
+];
+
+function Navigation({ isExpanded }: { isExpanded: boolean }) {
+  return (
+    <ul className="flex flex-col gap-4 items-center">
+      {navigationData.map((nav) => (
+        <li className="w-full" key={nav.name}>
+          <NavLink
+            className={({ isActive }) =>
+              `${
+                isActive ? "bg-blue-200" : ""
+              } w-full flex flex-1 items-center -mx-4x px-4 py-2 rounded`
+            }
+            to={nav.to()}
+          >
+            <span className="flex size-8 text-xl leading-none tracking-tight rounded items-center justify-center">
+              <span className="-ml-0.5">{nav.icon}</span>
+            </span>
+            {isExpanded && nav.name}
+          </NavLink>
+        </li>
+      ))}
+    </ul>
   );
 }

@@ -4,6 +4,7 @@ import type {
   LoginRequest,
   ResendOtpRequest,
   ResendOtpResponse,
+  SupportRequest,
   UserProfile,
   VerifyOtpRequest,
 } from "../types";
@@ -65,6 +66,7 @@ export const api = createApi({
         url: "authentication_app/logout/",
         method: "POST",
       }),
+      invalidatesTags: ["User"],
     }),
     resendOtp: builder.mutation<ResendOtpResponse, ResendOtpRequest>({
       query: (emailData) => ({
@@ -81,6 +83,13 @@ export const api = createApi({
         body: data,
       }),
       invalidatesTags: ["User"],
+    }),
+    sendSupportRequest: builder.mutation<void, SupportRequest>({
+      query: (body) => ({
+        url: "terms_and_support/support/",
+        method: "POST",
+        body,
+      }),
     }),
   }),
 });

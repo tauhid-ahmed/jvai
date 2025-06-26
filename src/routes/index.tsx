@@ -24,11 +24,20 @@ export function AppRouter() {
         <Route path={paths.landingPath()} element={<HomePage />} />
 
         {/* Protected routes */}
-        <Route element={<ProtectedLayout />}>
-          <Route element={<ChatLayout />}>
+        <Route element={<ChatLayout />}>
+          <Route element={<ProtectedLayout />}>
             <Route index element={<ChatPage />} />
             <Route path={paths.usersPath()} element={<UsersPage />} />
           </Route>
+          <Route
+            path={paths.helpAndSupportPath()}
+            element={<HelpAndSupportPage />}
+          />
+          <Route
+            path={paths.manageSubscriptionPath()}
+            element={<ManageSubscription />}
+          />
+          <Route path={paths.faqPath()} element={<FAQPage />} />
         </Route>
 
         {/* Auth routes */}
@@ -40,16 +49,6 @@ export function AppRouter() {
             element={<VerificationCodePage />}
           />
         </Route>
-
-        <Route
-          path={paths.helpAndSupportPath()}
-          element={<HelpAndSupportPage />}
-        />
-        <Route
-          path={paths.manageSubscriptionPath()}
-          element={<ManageSubscription />}
-        />
-        <Route path={paths.faqPath()} element={<FAQPage />} />
 
         {/* The "*" path is a catch-all for any routes that don't match */}
         {/* <Route path="*" element={<NotFoundPage />} /> */}

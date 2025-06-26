@@ -10,7 +10,12 @@ function App() {
   useEffect(() => {
     dispatch(initializeConfig());
   }, []);
-  if (isLoading) return <div>Loading....</div>;
+  if (isLoading)
+    return (
+      <div className="flex items-center justify-center dark:bg-grey-900 dark:text-grey-100 text-lg h-screen">
+        Loading....
+      </div>
+    );
   return (
     <>
       <AppRouter />

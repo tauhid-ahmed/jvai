@@ -1,13 +1,13 @@
-import { useAppDispatch } from "../app/hooks";
-import { toggleTheme } from "../features/app/configSlice";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { toggleTheme, selectTheme } from "../features/app/configSlice";
 import { Button } from "./button";
 
 export default function ModeToggle() {
   const dispatch = useAppDispatch();
+  const currentTheme = useAppSelector(selectTheme);
   return (
-    <div>
-      ModeToggle
-      <Button onClick={() => dispatch(toggleTheme())}>toggle theme</Button>
-    </div>
+    <Button className="w-full" onClick={() => dispatch(toggleTheme())}>
+      <strong className="text-lg">{currentTheme}</strong> toggle theme
+    </Button>
   );
 }

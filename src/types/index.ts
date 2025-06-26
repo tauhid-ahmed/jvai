@@ -30,3 +30,8 @@ export interface VerifyOtpRequest {
 export interface ResendOtpResponse {
   detail: string;
 }
+
+export interface SupportRequest {
+  email: string;
+  query: string;
+}
