@@ -100,5 +100,6 @@ export const {
   useGetUserProfileQuery,
   useResendOtpMutation,
   useVerifyOtpMutation,
+  useSendSupportRequestMutation,
   useLogoutMutation,
 } = api;

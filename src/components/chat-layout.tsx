@@ -52,7 +52,7 @@ export default function ChatLayout() {
           <Navigation isExpanded={!isMenuCollapsed} />
         </div>
         {!isMenuCollapsed && (
-          <div className="pb-8 pt-4">
+          <div className="pb-8 pt-4 px-4">
             <Button onClick={handleLogout} className="w-full">
               Logout
             </Button>
@@ -107,7 +107,7 @@ function Navigation({ isExpanded }: { isExpanded: boolean }) {
           <NavLink
             className={({ isActive }) =>
               `${
-                isActive ? "bg-blue-200" : ""
+                isActive ? "bg-blue-200 text-white" : ""
               } w-full flex flex-1 items-center -mx-4x px-4 py-2 rounded`
             }
             to={nav.to()}
