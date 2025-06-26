@@ -5,7 +5,7 @@ import type { AuthResponse, UserProfile } from "../../types";
 
 type AuthState = AuthResponse;
 
-const getInitialAuthData = (): AuthResponse | null => {
+const getInitialAuthData = (): AuthState | null => {
   const stored = localStorage.getItem("authData");
   try {
     return stored ? JSON.parse(stored) : null;
@@ -15,39 +15,28 @@ const getInitialAuthData = (): AuthResponse | null => {
   }
 };
 
-const initialState: AuthState = getInitialAuthData() ?? {
-  authData: null,
-  user: null,
-};
+const initialState: AuthState = getInitialAuthData();
 
 const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
     setCredentials: (state, action: PayloadAction<AuthResponse>) => {
-      state.authData = action.payload.authData;
-      state.user = action.payload.user;
+      state = action.payload;
       localStorage.setItem("authData", JSON.stringify(action.payload));
     },
 
-    setUser: (state, action: PayloadAction<UserProfile>) => {
-      state.user = action.payload;
-    },
-
     logOut: (state) => {
-      state.authData = null;
-      state.user = null;
+      state = null;
       localStorage.removeItem("authData");
     },
   },
 });
 
-export const { setCredentials, setUser, logOut } = authSlice.actions;
+export const { setCredentials, logOut } = authSlice.actions;
 
 export default authSlice.reducer;
 
-// 5. Corrected Selectors:
-//    They now read from the correct properties in our new AuthState.
-export const selectCurrentUser = (state: RootState) => state.auth.user;
+export const selectCurrentUser = (state: RootState) => state.auth;
 export const selectCurrentToken = (state: RootState) =>
-  state.auth.authData?.idToken || null;
+  state.auth?.idToken || null;

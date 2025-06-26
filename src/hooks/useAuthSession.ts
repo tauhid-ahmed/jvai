@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useAppDispatch } from "../app/hooks";
 import { useGetUserProfileQuery } from "../services/api";
-import { setUser } from "../features/auth/authSlice";
 import { useAuth } from "./useAuth";
+import { setCredentials } from "../features/auth/authSlice";
 
 export const useAuthSession = () => {
   const dispatch = useAppDispatch();
@@ -15,11 +15,17 @@ export const useAuthSession = () => {
     skip: !token,
   });
 
+  console.log(
+    useGetUserProfileQuery(undefined, {
+      skip: !token,
+    })
+  );
+
   useEffect(() => {
     if (isSuccess && userProfile) {
-      dispatch(setUser(userProfile));
+      dispatch(setCredentials(userProfile));
     }
-  }, [isSuccess, userProfile, dispatch]);
+  }, [dispatch]);
 
   return { isLoading };
 };

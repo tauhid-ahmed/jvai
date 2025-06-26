@@ -7,10 +7,7 @@ export interface UserProfile {
   refresh_token: string;
 }
 
-export type AuthResponse = {
-  authData: UserProfile | null;
-  user: UserProfile | null;
-};
+export type AuthResponse = UserProfile | null;
 
 export interface LoginRequest {
   email: string;
