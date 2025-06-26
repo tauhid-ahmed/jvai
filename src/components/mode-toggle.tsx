@@ -6,7 +6,11 @@ export default function ModeToggle() {
   const dispatch = useAppDispatch();
   const currentTheme = useAppSelector(selectTheme);
   return (
-    <Button className="w-full" onClick={() => dispatch(toggleTheme())}>
+    <Button
+      variant="outline"
+      className="w-full text-black dark:text-grey-100"
+      onClick={() => dispatch(toggleTheme())}
+    >
       <strong className="text-lg">{currentTheme}</strong> toggle theme
     </Button>
   );

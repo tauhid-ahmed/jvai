@@ -47,7 +47,14 @@ export default function ChatLayout() {
           )}
         </div>
         <div className="flex-1 overflow-y-scroll p-4 space-y-6 [&_*]:whitespace-nowrap!">
-          {!isMenuCollapsed && <ModeToggle />}
+          {!isMenuCollapsed && (
+            <>
+              <Button size="lg" className="w-full">
+                + New Chat
+              </Button>
+              <ModeToggle />
+            </>
+          )}
 
           <Navigation isExpanded={!isMenuCollapsed} />
         </div>
