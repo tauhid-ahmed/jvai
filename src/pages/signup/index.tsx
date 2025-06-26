@@ -33,10 +33,8 @@ export default function SignupPage() {
       localStorage.setItem("email", formData.email);
       dispatch(setCredentials(userData));
 
-      // Re-enabled navigation to the next step
       navigate(verificationCodePath());
     } catch (err: any) {
-      // Corrected the error message to be more specific
       console.error("Failed to signup:", err);
       // You can also set API errors to the state to display them in the UI
     }

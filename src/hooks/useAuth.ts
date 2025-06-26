@@ -9,7 +9,7 @@ export const useAuth = () => {
   const token = useAppSelector(selectCurrentToken);
   const user = useAppSelector(selectCurrentUser);
 
-  const isAuthenticated = useMemo(() => !!token && user?.is_verified, [token]);
+  const isAuthenticated = useMemo(() => !!token && !!user, [token, user]);
 
-  return { isAuthenticated, token };
+  return { isAuthenticated, user, token };
 };

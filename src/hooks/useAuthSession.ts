@@ -7,6 +7,7 @@ import { setUser } from "../features/auth/authSlice";
 export const useAuthSession = () => {
   const dispatch = useAppDispatch();
   const { token } = useAuth();
+
   const {
     data: userProfile,
     isSuccess,
@@ -19,7 +20,7 @@ export const useAuthSession = () => {
     if (isSuccess && userProfile) {
       dispatch(setUser(userProfile));
     }
-  }, [dispatch, isSuccess]);
+  }, [dispatch, isSuccess, userProfile]);
 
-  return { isLoading, token };
+  return { isLoading };
 };

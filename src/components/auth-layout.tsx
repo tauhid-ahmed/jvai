@@ -1,18 +1,20 @@
-import { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router";
-import { useAuth } from "../hooks/useAuth";
+import { useAuthSession } from "../hooks/useAuthSession";
+import { useAppSelector } from "../app/hooks";
+import { selectVerifiedUser } from "../features/auth/authSlice";
 import { chatPath } from "../paths";
 
 export default function AuthLayout() {
-  const { isAuthenticated } = useAuth();
+  const { isLoading } = useAuthSession();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (isAuthenticated) {
-      navigate(chatPath(), { replace: true });
-    }
-  }, [isAuthenticated, navigate]);
+  const verifiedUser = useAppSelector(selectVerifiedUser);
 
+  if (verifiedUser?.is_verified) {
+    navigate(chatPath());
+  }
+
+  if (isLoading) return <>Loading</>;
   return (
     <div className="h-screen grid place-items-center">
       <Outlet />
