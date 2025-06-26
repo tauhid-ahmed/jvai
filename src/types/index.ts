@@ -5,6 +5,7 @@ export interface UserProfile {
   localId: string;
   message: string;
   refresh_token: string;
+  is_verified?: boolean;
 }
 
 export type AuthResponse = {

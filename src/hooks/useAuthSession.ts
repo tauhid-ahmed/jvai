@@ -15,13 +15,11 @@ export const useAuthSession = () => {
     skip: !token,
   });
 
-  console.log(userProfile);
-
   useEffect(() => {
     if (isSuccess && userProfile) {
       dispatch(setUser(userProfile));
     }
-  }, [dispatch]);
+  }, [dispatch, isSuccess]);
 
-  return { isLoading };
+  return { isLoading, token };
 };

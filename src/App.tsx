@@ -2,7 +2,8 @@ import { useAuthSession } from "./hooks/useAuthSession";
 import { AppRouter } from "./routes";
 
 function App() {
-  useAuthSession();
+  const r = useAuthSession();
+  console.log(r);
   return (
     <>
       <AppRouter />

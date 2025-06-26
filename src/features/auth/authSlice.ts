@@ -20,7 +20,7 @@ const getInitialAuthData = (): UserProfile | null => {
 
 const initialState: AuthState = {
   authData: getInitialAuthData(),
-  user: getInitialAuthData(),
+  user: null,
 };
 
 const authSlice = createSlice({
@@ -51,4 +51,4 @@ export default authSlice.reducer;
 
 export const selectCurrentUser = (state: RootState) => state.auth.user;
 export const selectCurrentToken = (state: RootState) =>
-  state.auth?.authData?.idToken || null;
+  state.auth?.authData?.accessToken || null;
