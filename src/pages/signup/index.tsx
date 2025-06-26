@@ -34,7 +34,7 @@ export default function SignupPage() {
       dispatch(setCredentials(userData));
 
       navigate(verificationCodePath());
-    } catch (err: any) {
+    } catch (err) {
       console.error("Failed to signup:", err);
       // You can also set API errors to the state to display them in the UI
     }

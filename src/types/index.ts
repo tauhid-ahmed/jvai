@@ -18,13 +18,6 @@ export interface LoginRequest {
   password: string;
 }
 
-export interface ApiError {
-  data: {
-    [key: string]: any;
-  };
-  status: number;
-}
-
 export interface ResendOtpRequest {
   email: string;
 }
