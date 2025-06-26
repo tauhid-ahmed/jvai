@@ -24,6 +24,7 @@ export default function LoginPage() {
     e.preventDefault();
     try {
       const userData = await login(formData).unwrap();
+      console.log(userData);
       dispatch(setCredentials(userData));
       navigate(chatPath(), { replace: true });
     } catch (err) {

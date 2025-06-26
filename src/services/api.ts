@@ -1,7 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import type { RootState } from "../app/store";
 import type {
-  AuthResponse,
   LoginRequest,
   ResendOtpRequest,
   ResendOtpResponse,
@@ -34,7 +33,7 @@ export const api = createApi({
 
   endpoints: (builder) => ({
     // "signin" endpoint
-    login: builder.mutation<AuthResponse, LoginRequest>({
+    login: builder.mutation<UserProfile, LoginRequest>({
       query: (credentials) => ({
         url: "authentication_app/signin/",
         method: "POST",
@@ -45,7 +44,7 @@ export const api = createApi({
     }),
 
     // "signup" endpoint
-    signup: builder.mutation<AuthResponse, LoginRequest>({
+    signup: builder.mutation<UserProfile, LoginRequest>({
       query: (userInfo) => ({
         url: "authentication_app/signup/",
         method: "POST",

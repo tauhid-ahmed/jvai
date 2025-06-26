@@ -1,9 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "../../app/store";
-import type { AuthResponse, UserProfile } from "../../types";
+import type { UserProfile } from "../../types";
 
-type AuthState = AuthResponse;
+type AuthState = {
+  authData: UserProfile | null;
+  user: UserProfile | null;
+};
 
 const getInitialAuthData = (): UserProfile | null => {
   const stored = localStorage.getItem("authData");
@@ -17,16 +20,16 @@ const getInitialAuthData = (): UserProfile | null => {
 
 const initialState: AuthState = {
   authData: getInitialAuthData(),
-  user: null,
+  user: getInitialAuthData(),
 };
 
 const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    setCredentials: (state, action: PayloadAction<AuthResponse>) => {
-      state.authData = action.payload.authData;
-      state.user = action.payload.user;
+    setCredentials: (state, action: PayloadAction<UserProfile>) => {
+      state.authData = action.payload;
+      state.user = action.payload;
       localStorage.setItem("authData", JSON.stringify(action.payload));
     },
 
