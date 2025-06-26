@@ -15,6 +15,7 @@ import {
 import * as paths from "../paths";
 import AuthLayout from "../components/auth-layout";
 import ProtectedLayout from "../components/protected-layout";
+import ChatLayout from "../components/chat-layout";
 
 export function AppRouter() {
   return (
@@ -24,8 +25,10 @@ export function AppRouter() {
 
         {/* Protected routes */}
         <Route element={<ProtectedLayout />}>
-          <Route index element={<ChatPage />} />
-          <Route path={paths.usersPath()} element={<UsersPage />} />
+          <Route element={<ChatLayout />}>
+            <Route index element={<ChatPage />} />
+            <Route path={paths.usersPath()} element={<UsersPage />} />
+          </Route>
         </Route>
 
         {/* Auth routes */}
